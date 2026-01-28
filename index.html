@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Water Conservation Assistant - SDG 6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+        .animate-bounce-delay-1 {
+            animation: bounce 1s infinite;
+            animation-delay: 0.1s;
+        }
+        .animate-bounce-delay-2 {
+            animation: bounce 1s infinite;
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="bg-blue-500 p-4 rounded-2xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">AI Water Conservation Assistant</h1>
+                    <p class="text-gray-600">SDG 6: Clean Water and Sanitation</p>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div class="text-sm text-gray-700">
+                        <p class="font-semibold mb-1">About This Project</p>
+                        <p>This AI-powered assistant helps you monitor water usage, provides personalized conservation tips, and raises awareness about sustainable water management. Built for the 1M1B AI for Sustainability Virtual Internship.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="flex border-b">
+                <button onclick="showTab('chat')" id="tab-chat" class="flex-1 px-6 py-4 font-semibold transition-colors bg-blue-500 text-white">
+                    <div class="flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        Conservation Tips
+                    </div>
+                </button>
+                <button onclick="showTab('calculator')" id="tab-calculator" class="flex-1 px-6 py-4 font-semibold transition-colors bg-gray-50 text-gray-600 hover:bg-gray-100">
+                    <div class="flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Usage Analysis
+                    </div>
+                </button>
+                <button onclick="showTab('about')" id="tab-about" class="flex-1 px-6 py-4 font-semibold transition-colors bg-gray-50 text-gray-600 hover:bg-gray-100">
+                    <div class="flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Project Info
+                    </div>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <!-- Chat Tab -->
+                <div id="content-chat" class="tab-content">
+                    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-xl mb-4">
+                        <h2 class="text-xl font-bold mb-2">Ask the Water Expert</h2>
+                        <p class="text-blue-50">Get personalized advice on water conservation, usage patterns, and sustainability practices</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-4 h-96 overflow-y-auto mb-4" id="chatMessages">
+                        <div class="text-center text-gray-500 mt-20">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                            </svg>
+                            <p class="text-lg font-semibold mb-2">Start a Conversation</p>
+                            <p class="text-sm">Ask about water conservation tips, daily usage, or sustainability practices</p>
+                            <p class="text-xs mt-4 text-gray-400">Demo Mode: Simulated AI responses for demonstration</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <input
+                            type="text"
+                            id="chatInput"
+                            placeholder="Ask about water conservation..."
+                            class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                            onkeypress="if(event.key === 'Enter') sendMessage()"
+                        />
+                        <button
+                            onclick="sendMessage()"
+                            class="bg-blue-500 text-white px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors flex items-center gap-2"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                            Send
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Calculator Tab -->
+                <div id="content-calculator" class="tab-content hidden">
+                    <div class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-6 rounded-xl mb-6">
+                        <h2 class="text-xl font-bold mb-2">Daily Water Usage Calculator</h2>
+                        <p class="text-cyan-50">Track your water consumption and get AI-powered recommendations</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Drinking & Cooking (liters/day)
+                            </label>
+                            <input type="number" id="drinking" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="e.g., 10">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Bathing & Personal Care (liters/day)
+                            </label>
+                            <input type="number" id="bathing" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="e.g., 60">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Washing Clothes & Dishes (liters/day)
+                            </label>
+                            <input type="number" id="washing" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="e.g., 40">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Cleaning & Household (liters/day)
+                            </label>
+                            <input type="number" id="cleaning" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="e.g., 15">
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Garden & Other Uses (liters/day)
+                            </label>
+                            <input type="number" id="garden" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="e.g., 20">
+                        </div>
+                    </div>
+
+                    <button
+                        onclick="analyzeUsage()"
+                        class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-4 rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all font-semibold text-lg flex items-center justify-center gap-2"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                        Analyze & Get Recommendations
+                    </button>
+
+                    <div id="analysisResult" class="hidden mt-6"></div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="content-about" class="tab-content hidden">
+                    <div class="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-6 rounded-xl mb-6">
+                        <h2 class="text-2xl font-bold mb-2">Project Documentation</h2>
+                        <p class="text-purple-50">1M1B AI for Sustainability Virtual Internship</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Project Overview</h3>
+                            <div class="space-y-2 text-gray-700">
+                                <p><strong>Title:</strong> AI Water Conservation Assistant</p>
+                                <p><strong>SDG Alignment:</strong> SDG 6 - Clean Water and Sanitation</p>
+                                <p><strong>Institution:</strong> [Your College Name]</p>
+                                <p><strong>Student Name:</strong> [Your Name]</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Problem Statement</h3>
+                            <p class="text-gray-700">
+                                Water scarcity affects over 2 billion people globally. Many households lack awareness about their water consumption patterns and practical ways to reduce usage. This AI assistant bridges the knowledge gap by providing personalized insights and actionable conservation strategies.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">AI Solution Overview</h3>
+                            <p class="text-gray-700 mb-3">This application demonstrates:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li><strong>Conversational AI Interface:</strong> Natural language interaction for water conservation advice</li>
+                                <li><strong>Prompt Engineering:</strong> Structured prompts for usage analysis and recommendations</li>
+                                <li><strong>Pattern Recognition:</strong> Analyzes usage data to identify conservation opportunities</li>
+                                <li><strong>Decision Support:</strong> Provides actionable, context-aware suggestions</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Target Users</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Individual households seeking to reduce water consumption</li>
+                                <li>Students learning about sustainable living</li>
+                                <li>Community leaders promoting water conservation</li>
+                                <li>Environmental organizations conducting awareness campaigns</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-2 border-blue-200 rounded-xl p-6 bg-blue-50">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Responsible AI Considerations</h3>
+                            <div class="space-y-3 text-gray-700">
+                                <p><strong>Fairness:</strong> Recommendations are based on usage patterns, not demographic assumptions</p>
+                                <p><strong>Transparency:</strong> All AI suggestions clearly explain the reasoning behind conservation tips</p>
+                                <p><strong>Privacy:</strong> No personal data is stored; all analysis happens in real-time</p>
+                                <p><strong>Ethics:</strong> Promotes sustainable behavior without creating anxiety or guilt</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-2 border-green-200 rounded-xl p-6 bg-green-50">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Expected Impact</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Increased awareness about personal water consumption</li>
+                                <li>10-30% reduction in household water usage through behavioral changes</li>
+                                <li>Scalable solution for community-wide conservation initiatives</li>
+                                <li>Educational tool for sustainability programs</li>
+                                <li>Contribution to SDG 6 targets for sustainable water management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-6 text-center text-gray-600 text-sm">
+            <p>Built for 1M1B AI for Sustainability Virtual Internship</p>
+            <p class="mt-1">In collaboration with IBM SkillsBuild & AICTE</p>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function showTab(tabName) {
+            const tabs = ['chat', 'calculator', 'about'];
+            tabs.forEach(tab => {
+                document.getElementById(`content-${tab}`).classList.add('hidden');
+                document.getElementById(`tab-${tab}`).classList.remove('bg-blue-500', 'text-white');
+                document.getElementById(`tab-${tab}`).classList.add('bg-gray-50', 'text-gray-600');
+            });
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.remove('bg-gray-50', 'text-gray-600');
+            document.getElementById(`tab-${tabName}`).classList.add('bg-blue-500', 'text-white');
+        }
+
+        // Simulated AI responses for demo
+        const aiResponses = {
+            'tips': 'Here are some effective water conservation tips: 1) Install low-flow showerheads to reduce water usage by up to 50%. 2) Fix leaky faucets - a small drip can waste 20 gallons per day. 3) Turn off the tap while brushing teeth to save 8 gallons per day. 4) Use a bucket to collect water while waiting for shower to warm up, then use it for plants.',
+            'usage': 'Average daily water usage varies by activity: Bathing (40-80L), Toilet flushing (20-30L), Cooking and drinking (10L), Laundry (50-100L per load), Dishwashing (20L). A typical person uses 150-200 liters per day. Monitor your usage and aim to reduce by 20-30%.',
+            'save': 'To save water effectively: Use full loads in washing machines and dishwashers, install dual-flush toilets, water plants early morning or evening to reduce evaporation, collect rainwater for gardening, and use a broom instead of hose to clean driveways.',
+            'default': 'Water conservation is crucial for sustainability. Simple actions like fixing leaks, using efficient appliances, and being mindful of daily habits can significantly reduce water waste. Every drop counts in protecting this precious resource for future generations.'
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'flex justify-end mb-4';
+            userMsg.innerHTML = `<div class="max-w-xl px-4 py-3 rounded-2xl bg-blue-500 text-white">${message}</div>`;
+            chatMessages.appendChild(userMsg);
+
+            // Show loading
+            const loading = document.createElement('div');
+            loading.className = 'flex justify-start mb-4';
+            loading.innerHTML = `
+                <div class="bg-white px-4 py-3 rounded-2xl shadow">
+                    <div class="flex gap-2">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce-delay-1"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce-delay-2"></div>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(loading);
+
+            // Simulate AI response
+            setTimeout(() => {
+                loading.remove();
+                
+                let response = aiResponses.default;
+                const lowerMsg = message.toLowerCase();
+                if (lowerMsg.includes('tip') || lowerMsg.includes('how')) response = aiResponses.tips;
+                else if (lowerMsg.includes('usage') || lowerMsg.includes('much')) response = aiResponses.usage;
+                else if (lowerMsg.includes('save') || lowerMsg.includes('reduce')) response = aiResponses.save;
+
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'flex justify-start mb-4';
+                aiMsg.innerHTML = `<div class="max-w-xl px-4 py-3 rounded-2xl bg-white text-gray-800 shadow">${response}</div>`;
+                chatMessages.appendChild(aiMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1500);
+
+            input.value = '';
+        }
+
+        function analyzeUsage() {
+            const drinking = parseFloat(document.getElementById('drinking').value) || 0;
+            const bathing = parseFloat(document.getElementById('bathing').value) || 0;
+            const washing = parseFloat(document.getElementById('washing').value) || 0;
+            const cleaning = parseFloat(document.getElementById('cleaning').value) || 0;
+            const garden = parseFloat(document.getElementById('garden').value) || 0;
+            
+            const total = drinking + bathing + washing + cleaning + garden;
+
+            if (total === 0) {
+                alert('Please enter your water usage data first');
+                return;
+            }
+
+            let category, categoryColor, assessment, tips, savings;
+
+            if (total > 200) {
+                category = 'HIGH';
+                categoryColor = 'bg-red-100 text-red-700';
+                assessment = 'Your water usage is higher than average (150-200L/day). There are significant opportunities for conservation.';
+                tips = [
+                    'Install low-flow showerheads and faucet aerators to reduce bathing water by 30-50%',
+                    'Fix any leaky taps immediately - even small drips waste 20+ liters per day',
+                    'Run washing machines and dishwashers only with full loads to maximize efficiency'
+                ];
+                savings = '40-60 liters per day';
+            } else if (total > 150) {
+                category = 'MODERATE';
+                categoryColor = 'bg-yellow-100 text-yellow-700';
+                assessment = 'Your water usage is within the average range (150-200L/day). With some adjustments, you can reduce consumption further.';
+                tips = [
+                    'Take shorter showers (5-7 minutes) and consider turning off water while soaping',
+                    'Use a bucket while waiting for shower water to warm up, then use for plants',
+                    'Turn off taps while brushing teeth or washing dishes to save 8-10 liters per use'
+                ];
+                savings = '20-30 liters per day';
+            } else {
+                category = 'LOW';
+                categoryColor = 'bg-green-100 text-green-700';
+                assessment = 'Excellent! Your water usage is below average. You\'re already practicing good conservation habits.';
+                tips = [
+                    'Continue your great habits and inspire others to conserve water',
+                    'Consider collecting rainwater for gardening and outdoor use',
+                    'Monitor for any increases in usage that might indicate new leaks or inefficiencies'
+                ];
+                savings = '5-10 liters per day';
+            }
+
+            const resultDiv = document.getElementById('analysisResult');
+            resultDiv.className = 'bg-white border-2 border-blue-200 rounded-xl p-6 space-y-4';
+            resultDiv.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <h3 class="text-2xl font-bold text-gray-800">Your Water Footprint</h3>
+                    <div class="px-4 py-2 rounded-full font-semibold ${categoryColor}">
+                        ${category}
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-lg text-gray-700">
+                        <span class="font-bold text-3xl text-blue-600">${total}L</span> per day
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-700 mb-3">${assessment}</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        Conservation Recommendations
+                    </h4>
+                    <ul class="space-y-2">
+                        ${tips.map((tip, idx) => `
+                            <li class="flex items-start gap-3 bg-green-50 p-3 rounded-lg">
+                                <span class="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                                    ${idx + 1}
+                                </span>
+                                <span class="text-gray-700">${tip}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border-2 border-green-200">
+                    <p class="text-gray-700">
+                        <span class="font-bold text-green-700">Potential Savings:</span> ${savings}
+                    </p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
